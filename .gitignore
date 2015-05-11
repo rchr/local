@@ -1,4 +1,4 @@
 scripts/statistics/figures
-*.swp
+**/*.swp
 *.png
 *.backup
