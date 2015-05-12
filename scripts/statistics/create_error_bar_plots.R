@@ -122,14 +122,18 @@ create_mapping_error_bar_plots <- function(protocol) {
 			 min = sector_counts$s_only,
 			 max = sector_counts$s_all
 			 )
-	filename=paste0("error_bars_", protocol, ".png")
+	title=paste("Buildings per sector", protocol)
+	filename=paste0("figures/buildings_per_sector_error_bars_", protocol, ".png")
 	limits <- aes(ymax = number + max, ymin = number - min)
 	dodge <- position_dodge(width=0.9)
 	ggplot(df, aes(y=number, x=sector_name)) +
 	geom_bar(stat="identity", fill="#FF9999") +
-	geom_errorbar(limits, position=dodge, width=0.5)
+	geom_errorbar(limits, position=dodge, width=0.5, size=0.6) +
+	xlab("Sector Name") +
+	ylab("Number Buildings") +
+	ggtitle(title)
 	ggsave(file=filename)
 }
 
 create_mapping_error_bar_plots("gpc")
-create_mappig_error_bar_plots("ecoregion")
+create_mapping_error_bar_plots("ecoregion")
