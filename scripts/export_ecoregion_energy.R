@@ -1,4 +1,8 @@
 # Exports energy consumption per sector per energy carriers from db.
+# Calculates energy demands per energy source as sum of
+#	- energy demand for buildings with one energy source, and
+#	- energy demand for buildings with combined energy sources. The partitioning of a building's energy demand per source is done by distributing the energy demand to each energy source with the same probability. E.g. if a building's energy demand is 900 MWh/a ans the building's energy sources are gas, strom and coal, then each source is assigned with 300MWh/a. If we have more accurate data about the share, this calculation can be done more accurate.
+
 # TODO: Add all sectors.
 
 rm(list=ls())
@@ -242,8 +246,8 @@ energy_coal <- energy_coal + sum(coal_mixed$val)
 energy_wp <- energy_wp + sum(wp_mixed$val)
 energy_sum <- energy_gas + energy_oil + energy_strom + energy_fw + energy_coal
 
-energy_source <- c("Energy carriers", "Power", "EL heating oil", "Natural gas", "District heat", "Wood", "Environmental heat", "Solar collectors", "Biogases", "Waste", "Liquid gas", "Vegetable oil", "Lignite", "Coal", "Total");
-energy_vals <- c("2011", energy_strom, energy_oil, energy_gas, energy_fw, 0, 0, 0, 0, 0, 0, 0, energy_coal, 0, energy_sum)
-result = data.frame(energy_source, energy_vals)
-write.csv(result, "ecoregion.csv")
+energy_carrier <- c("Power", "EL heating oil", "Natural gas", "District heat", "Wood", "Environmental heat", "Solar collectors", "Biogases", "Waste", "Liquid gas", "Vegetable oil", "Lignite", "Coal", "Total");
+x2011 <- c(energy_strom, energy_oil, energy_gas, energy_fw, 0, 0, 0, 0, 0, 0, 0, energy_coal, 0, energy_sum)
+result = data.frame(energy_carrier, x2011)
+write.csv(result, "ecoregion.csv", row.names=FALSE)
 
