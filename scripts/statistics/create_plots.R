@@ -136,8 +136,9 @@ ggsave(file="figures/boxplot_gpc_norm_ground.png")
 counts = ddply(.data=co2_gpc_all, .(sector_name), summarize, n=paste0("n=", length(sector_name)))
 ggplot(co2_gpc_all, aes(x=co2)) +
 	geom_density() +
+	xlim(0, 200) +
 	facet_wrap(~ sector_name) + 
-	geom_text(data=counts, aes(x=1000, y=.15, label=n), colour="black", inherit.aes=F, parse=F) +
+	geom_text(data=counts, aes(x=150, y=.2, label=n), colour="black", inherit.aes=F, parse=F) +
 	ggtitle("Probability density GPC, normalized by building's groundsurface.")
 ggsave(file="figures/pdf_gpc_norm_ground.png")
 
@@ -227,8 +228,9 @@ ggsave(file="figures/boxplot_eco_norm_ground.png")
 counts = ddply(.data=co2_eco_all, .(sector_name), summarize, n=paste0("n=", length(sector_name)))
 ggplot(co2_eco_all, aes(x=co2)) +
 	geom_density() +
+	xlim(0, 200) +
 	facet_wrap(~ sector_name) + 
-	geom_text(data=counts, aes(x=250, y=.15, label=n), colour="black", inherit.aes=F, parse=F) +
+	geom_text(data=counts, aes(x=150, y=.15, label=n), colour="black", inherit.aes=F, parse=F) +
 	ggtitle("Probability density EcoRegion, normalized by building's groundsurface.")
 ggsave(file="figures/pdf_eco_norm_ground.png")
 
